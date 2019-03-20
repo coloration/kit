@@ -1,3 +1,3 @@
-export function thousand (t) {
+export default function thousand (t) {
   return t
 }

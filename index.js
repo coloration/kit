@@ -1,0 +1,1 @@
+export { default as thousand } from './src/thousand'
