@@ -11,7 +11,7 @@
   "license": "MIT",
   "description": "",
   "scripts": {
-    "webpack": "./node_modules/.bin/webpack --watch --progress --color"
+    "build": "./node_modules/.bin/webpack --watch --progress --color"
   },
   "devDependencies": {
     "ts-loader": "^5.3.3",

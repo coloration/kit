@@ -7,7 +7,6 @@ export function toTree (idField, pidField, childrenField, parentField, arr) {
 
   const nodeMap = {}
 
-
   arr.forEach(function format (node) {
     
   })

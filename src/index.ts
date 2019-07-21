@@ -1,1 +1,3 @@
-export { default as thousand } from './thousand'
+export * from './array'
+export * from './string'
+export * from './object'
