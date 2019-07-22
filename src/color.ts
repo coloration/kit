@@ -2,11 +2,11 @@
  * hex: #3
  */
 
-export function pruehex (hex) {
+export function pruehex (hex: string) {
   return hex.replace('#', '')
 }
 
-export function hexful (hex, withDeco) {
+export function hexful (hex: string, withDeco?: boolean) {
   hex = pruehex(hex)
 
   while(hex.length < 6) { hex += hex }
@@ -14,7 +14,7 @@ export function hexful (hex, withDeco) {
   return (withDeco ? '#' :'') + hex.substr(0, 6)
 }
 
-export function hex2rgba (hex, withDeco) {
+export function hex2rgba (hex: string, withDeco?: boolean) {
   hex = pruehex(hex)
   let res = []
   while (hex.length > 0) {

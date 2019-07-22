@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   mode: 'production',
@@ -15,10 +15,17 @@ module.exports = {
           return [
             {
               loader: ['ts-loader'],
+              options: {
+                configFile: path.resolve(__dirname, './tsconfig.json')
+              }
             },
           ];
         },
       },
+      {
+        test: /\.js$/,
+        exclude: /test/,
+      }
     ]
   },
   resolve: {
@@ -26,6 +33,8 @@ module.exports = {
   },
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, 'lib')
+    path: path.resolve(__dirname, 'lib'),
+    library: 'kit',
+    libraryTarget: 'umd',
   }
 }

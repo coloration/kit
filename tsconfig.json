@@ -5,7 +5,18 @@
     "module": "commonjs",
     "target": "es6",
     "jsx": "react",
-    "sourceMap": true,
-    "declaration": true   
-  }
+    "sourceMap": false,
+    "declaration": true,
+    "allowJs": false,
+    "declarationDir": "./types"
+  },
+  "include": [
+    "src/array.ts",
+    "src/math.ts",
+    "src/object.ts",
+    "src/string.ts",
+  ], 
+  "exclude": [
+    "node_modules"
+  ]
 }
