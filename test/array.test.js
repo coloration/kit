@@ -1,7 +1,7 @@
 
 import {
   isArr, toArr, arrAdd, arrRemove
-} from '../src/array'
+} from '../src/array.isArray'
 
 describe('method test: isArr', () => {
   test('test isArr with number', () => {

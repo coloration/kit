@@ -11,7 +11,7 @@
     "declarationDir": "./types"
   },
   "include": [
-    "src/array.ts",
+    "src/array.is.ts",
     "src/math.ts",
     "src/object.ts",
     "src/string.ts",

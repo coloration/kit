@@ -1,6 +1,6 @@
 export const dateDayMicrosecond = 86400000
 
-export function nearNDayTime (n, offsetToday = 0) {
+export function nearNDayTime (n: number, offsetToday = 0) {
 
   const now = new Date().getTime()
   const near = now - offsetToday * dateDayMicrosecond
