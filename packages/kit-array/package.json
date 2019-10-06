@@ -1,6 +1,6 @@
 {
   "name": "@coloration/kit-array",
-  "version": "0.0.2",
+  "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -18,5 +18,8 @@
     "@types/lodash.curry": "^4.1.6",
     "@types/lodash.isarray": "^4.0.6"
   },
-  "gitHead": "6fecb701e5fb20020c394cf43fb3de9ff06a4c5b"
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "3d897a0be65c3b7e72bbb627000bac3b2a13816f"
 }
