@@ -1,0 +1,10 @@
+0 silly argv { _: [ 'add' ],
+0 silly argv   scope: '@coloration/kit-operator',
+0 silly argv   globs: [],
+0 silly argv   lernaVersion: '3.16.4',
+0 silly argv   '$0': 'lerna',
+0 silly argv   pkg: 'lodash.isFunction' }
+1 notice cli v3.16.4
+2 verbose rootPath /Users/apple/workhub/mine/kit
+3 error Error: 404 Not Found - GET http://registry.npmjs.org/lodash.isFunction - Not found
+3 error     at res.buffer.catch.then.body (/Users/apple/.config/yarn/global/node_modules/@evocateur/npm-registry-fetch/check-response.js:104:15)
