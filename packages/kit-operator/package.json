@@ -16,5 +16,6 @@
   "devDependencies": {
     "@types/lodash.curry": "^4.1.6",
     "@types/lodash.isfunction": "^3.0.6"
-  }
+  },
+  "gitHead": "6fecb701e5fb20020c394cf43fb3de9ff06a4c5b"
 }
