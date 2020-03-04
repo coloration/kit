@@ -1,20 +1,22 @@
 import { curry, not, is } from '../operator'
 
-export function toArray (o: any) {
+type ExistValidFunc<T = any> = undefined | ((oItem: T, item: T) => boolean)
+
+export function toArray<T = any> (o: T | T[]) : T[] {
   return Array.isArray(o) ? o.slice() : Array.from(arguments)
 }
 
 
-function arrAdd (
-  existValid: undefined | ((oItem: any, item: any) => boolean),
-  o: any[],
-  item: any
-): any[] {
+function arrAdd<T = any> (
+  existValid: ExistValidFunc<T>,
+  o: T[],
+  item: T
+): T[] {
 
   const valid = existValid || not
   const items = toArray(item)
-  .filter(function remainItem (item: any) {
-    return o.every(function validate (oItem: any) {
+  .filter(function remainItem (item) {
+    return o.every(function validate (oItem) {
       return valid(oItem, item)
     })
   })
@@ -22,10 +24,10 @@ function arrAdd (
   return o.concat(items)
 }
 
-function arrIncludes (
-  existValid: undefined | ((oItem: any, item: any) => boolean),
-  o: any[],
-  item: any
+function arrIncludes<T = any> (
+  existValid: undefined | ((oItem: T, item: T) => boolean),
+  o: T[],
+  item: T
 ) {
   const valid = existValid || is
   const items = toArray(item)
@@ -37,21 +39,21 @@ function arrIncludes (
   })
 }
 
-function arrRemove (
-  existValid: undefined | ((o: any, item: any) => boolean),
-  o: any[],
-  item: any
+function arrRemove<T = any> (
+  existValid: undefined | ((o: T, item: T) => boolean),
+  o: T[],
+  item: T
 ) {
   const items = toArray(item)
   const valid = existValid || is
 
-  return o.filter(function remain (oItem, any) {
-    return !items.some(function (item: any) {
+  return o.filter(function remain (oItem) {
+    return !items.some(function (item) {
       return valid(oItem, item)
     })
   })
 }
 
-export const arrayRemove = curry(arrRemove)
-export const arrayIncludes = curry(arrIncludes)
-export const arrayAdd = curry(arrAdd)
+export const arrayRemove = curry<ExistValidFunc<any>, any[], any, any[]>(arrRemove)
+export const arrayIncludes = curry<ExistValidFunc<any>, any[], any, boolean>(arrIncludes)
+export const arrayAdd = curry<ExistValidFunc<any>, any[], any, any[]>(arrAdd)
