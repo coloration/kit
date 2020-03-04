@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   mode: 'production',
-  entry: './src/_index.ts',
+  entry: './lib/index.ts',
   devtool: 'inline-source-map',
   module: {
     rules: [
@@ -33,7 +33,7 @@ module.exports = {
   },
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, 'lib'),
+    path: path.resolve(__dirname, 'min'),
     library: 'kit',
     libraryTarget: 'umd',
   }
