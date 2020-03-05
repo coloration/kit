@@ -10,6 +10,7 @@
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "emitDeclarationOnly": true,
     "sourceMap": false,
     "lib": [
       "esnext",
@@ -18,7 +19,6 @@
     // 允许 lodash 按需导入
     "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "outDir": "./dist/",
     "declarationDir": "./types"
   },
   "include": [

@@ -1,36 +1,32 @@
 const path = require('path')
 const TerserPlugin = require('terser-webpack-plugin')
 
+
 module.exports = {
   mode: 'production',
   entry: './lib/index.ts',
-  devtool: 'inline-source-map',
+  resolve: {
+    extensions: ['.ts', '.js', '.json']
+  },
   module: {
     rules: [
       {
-        test: /\.ts$/,
-        exclude: [
-          path.resolve(__dirname, 'node_modules'),
-        ],
-        use: () => {
-          return [
-            {
-              loader: ['ts-loader'],
-              options: {
-                configFile: path.resolve(__dirname, './tsconfig.json')
-              }
-            },
-          ];
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            '@babel/preset-env',
+            '@babel/preset-typescript',
+          ],
+          plugins: [
+            '@babel/plugin-proposal-object-rest-spread',
+            '@babel/plugin-syntax-dynamic-import',
+            '@babel/plugin-proposal-class-properties',
+          ],
         },
-      },
-      {
-        test: /\.js$/,
-        exclude: /test/,
+        test: /.ts?$/,
+        // exclude: /node_modules/,
       }
     ]
-  },
-  resolve: {
-    extensions: ['.ts', '.js']
   },
   optimization: {
     minimize: true,
@@ -39,8 +35,8 @@ module.exports = {
   
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, 'min'),
+    path: path.resolve(__dirname, 'dist'),
     library: 'kit',
-    libraryTarget: 'umd',
+    libraryTarget: '',
   }
 }
