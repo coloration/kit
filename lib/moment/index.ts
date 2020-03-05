@@ -1,4 +1,5 @@
-import moment, { Moment } from 'moment'
+import { Moment } from 'moment'
+import moment from 'moment/src/moment'
 
 export enum MomentFormatEnum {
   YYYY_MM_DD = 'YYYY-MM-DD',

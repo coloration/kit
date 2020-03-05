@@ -1,5 +1,17 @@
 # Change Log
 
+## 0.0.6
+
+*2020-03-05*
+
+### Fix 
+
+error: `curry` is not a function 
+
+### Test
+
+add `array`, `object`
+
 ## 0.0.5 ~ 0.0.4
 
 *2020-03-04*

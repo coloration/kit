@@ -1,25 +1,39 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowJs": false,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "removeComments": true,
+    "noLib": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": false,
     "lib": [
-      "dom.iterable",
       "esnext",
-      "es5",
-      "es6",
       "dom"
     ],
-    "target": "es5",
+    // 允许 lodash 按需导入
     "allowSyntheticDefaultImports": true,
-    "jsx": "preserve",
-    "sourceMap": false,
     "declaration": true,
+    "outDir": "./dist/",
     "declarationDir": "./types"
   },
   "include": [
-    "lib/**/*.ts",
-  ], 
+    "lib/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "typeRoots": [
+    "node_modules/@types",
+    "manual_typings"
+  ],
+  "paths": {
+    "lodash/*": [
+      "node_modules/@types/lodash/*"
+    ],
+  },
 }
-
