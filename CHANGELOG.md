@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.0.0
+
+### Feature
+
+- add `object/tree` content, `toTree`, `flattenTree`, `findTreeParent`, `findTreeParentFromList`
+
+- change file struct, `dist/index.js` is a umd js file. `lib` contains es5 code. source in `src`
+
 ## 0.0.7 ~ 0.0.6
 
 *2020-03-05*

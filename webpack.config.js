@@ -4,9 +4,9 @@ const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
   mode: 'production',
-  entry: './lib/index.ts',
+  entry: './lib/index.js',
   resolve: {
-    extensions: ['.ts', '.js', '.json']
+    extensions: ['.js']
   },
   module: {
     rules: [
@@ -23,7 +23,7 @@ module.exports = {
             '@babel/plugin-proposal-class-properties',
           ],
         },
-        test: /.ts?$/,
+        test: /.js$/,
         // exclude: /node_modules/,
       }
     ]
@@ -37,6 +37,6 @@ module.exports = {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
     library: 'kit',
-    libraryTarget: '',
+    libraryTarget: 'umd',
   }
 }

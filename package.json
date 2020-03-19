@@ -1,7 +1,7 @@
 {
   "name": "@coloration/kit",
-  "version": "0.0.7",
-  "main": "./dist/index.js",
+  "version": "1.0.0",
+  "main": "lib/index.js",
   "types": "./types",
   "repository": {
     "type": "git",
@@ -11,7 +11,8 @@
   "license": "MIT",
   "description": "",
   "scripts": {
-    "build": "tsc & ./node_modules/.bin/webpack",
+    "build:lib": "tsc",
+    "build:dist": "webpack",
     "test": "tsc & jest"
   },
   "devDependencies": {
@@ -22,7 +23,6 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@types/d3-format": "^1.3.1",
-    "@types/lodash": "^4.14.149",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
     "jest": "^24.8.0",
@@ -33,7 +33,6 @@
   },
   "dependencies": {
     "d3-format": "^1.4.3",
-    "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "typescript": "^3.3.4000"
   }

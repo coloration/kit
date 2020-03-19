@@ -1,6 +1,6 @@
-import { curry, PlainObject, isObject } from "../operator"
+import { PlainObject, isObject, curry } from "../operator"
 
-function objHas (obj: PlainObject, ...fields: string[]): boolean {
+export function objectHas (obj: PlainObject, ...fields: string[]): boolean {
 
   return fields.every(function (field) {
     if (!isObject(obj)) return false
@@ -10,7 +10,7 @@ function objHas (obj: PlainObject, ...fields: string[]): boolean {
   })
 }
 
-function objGet<V = any, D = undefined> (defaultValue: D, obj: PlainObject, ...fields: string[]) {
+export function objectGet<V = any, D = undefined> (defaultValue: D, obj: PlainObject, ...fields: string[]) {
 
   if (!isObject(obj)) return defaultValue
   let value: V
@@ -22,6 +22,7 @@ function objGet<V = any, D = undefined> (defaultValue: D, obj: PlainObject, ...f
   return value === undefined ? defaultValue : value
 }
 
-export const objectHas = curry(objHas)
-export const objectGet = curry(objGet)
+export const objectGetDefaultNull: <T = any>(obj: PlainObject, ...fields: string[]) => T | null
+  = curry(objectGet, null)
+
 export * from './tree'

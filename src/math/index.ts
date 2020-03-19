@@ -29,16 +29,17 @@ export function c (m: number, n: number) {
   return x / y
 }
 
-export function aPick (m: any[], n: number) {
+export function aPick<T> (m: T[], n: number): T[][] {
 
+  return []
 }
 
-export function cPick (nColl: any[], m: number): any[][] {
+export function cPick<T> (nColl: T[], m: number): T[][] {
   if (m === 0) return []
   const n = nColl.length
   if (m === n) return [nColl.slice()]
   
-  const result: any[][] = []
+  const result: T[][] = []
   for (let i = 0; i < n; i++) {
     const x = nColl.slice(i, i + 1)
     const subs = m > 1 ? 

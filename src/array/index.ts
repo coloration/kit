@@ -1,13 +1,13 @@
-import { curry, not, is } from '../operator'
+import { not, is } from '../operator'
 
-type ExistValidFunc<T = any> = undefined | ((oItem: T, item: T) => boolean)
+export type ExistValidFunc<T = any> = undefined | ((oItem: T, item: T) => boolean)
 
 export function toArray<T = any> (o: T | T[]) : T[] {
   return Array.isArray(o) ? o.slice() : Array.from(arguments)
 }
 
 
-function arrAdd<T = any> (
+export function arrayAdd<T = any> (
   existValid: ExistValidFunc<T>,
   o: T[],
   item: T
@@ -24,7 +24,7 @@ function arrAdd<T = any> (
   return o.concat(items)
 }
 
-function arrIncludes<T = any> (
+export function arrayIncludes<T = any> (
   existValid: undefined | ((oItem: T, item: T) => boolean),
   o: T[],
   item: T
@@ -39,7 +39,7 @@ function arrIncludes<T = any> (
   })
 }
 
-function arrRemove<T = any> (
+export function arrayRemove<T = any> (
   existValid: undefined | ((o: T, item: T) => boolean),
   o: T[],
   item: T
@@ -53,7 +53,3 @@ function arrRemove<T = any> (
     })
   })
 }
-
-export const arrayRemove = curry<ExistValidFunc<any>, any[], any, any[]>(arrRemove)
-export const arrayIncludes = curry<ExistValidFunc<any>, any[], any, boolean>(arrIncludes)
-export const arrayAdd = curry<ExistValidFunc<any>, any[], any, any[]>(arrAdd)
