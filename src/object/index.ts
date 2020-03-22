@@ -1,7 +1,6 @@
 import { PlainObject, isObject, curry } from "../operator"
 
 export function objectHas (obj: PlainObject, ...fields: string[]): boolean {
-
   return fields.every(function (field) {
     if (!isObject(obj)) return false
     const has = obj.hasOwnProperty(field)
@@ -24,5 +23,14 @@ export function objectGet<V = any, D = undefined> (defaultValue: D, obj: PlainOb
 
 export const objectGetDefaultNull: <T = any>(obj: PlainObject, ...fields: string[]) => T | null
   = curry(objectGet, null)
+
+
+export function reverseKeyValue <T = string> (obj: PlainObject<T>): PlainObject<T> {
+  return Object.fromEntries(reverseEntries<T>(Object.entries(obj)))
+}
+
+export function reverseEntries <T = string>(entries: (string | T)[][]) : (string | T)[][] {
+  return entries.map(entry => entry.reverse())
+}
 
 export * from './tree'

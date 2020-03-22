@@ -1,71 +1,111 @@
-# Kit
+# Coloration/Kit
 
-项目里常用的工具库函数，可以配合 ramda.js 或者 lodash.js 进行柯里化再使用
+项目里常用的工具库函数，可以配合 ramda.js 或者 lodash.js 进行柯里化再使用, 本项目导出的 
+`curry` 不支持占位符功能
 
-## 使用
 
-#### 安装
+#### Start Up
 ```bash
 $ yarn add @coloration/kit
 ```
 
-#### 使用
+#### Use
 
 ``` js
-import { arrAdd } from '@coloration/kit'
-// or
-import { addRemove } from '@coloration/kit/lib/array'
+import { arrayAdd, arrayRemove, curry } from '@coloration/kit'
 
-
-const arr = arrAdd(undefined, [1, 2, 3, 4], [2, 4, 5, 7])
+const arrAdd = curry(undefined)
+const arr = arrAdd([1, 2, 3, 4], [2, 4, 5, 7])
 // [1, 2, 3, 4, 5, 7]
-const arr2 = arrRemove(undefined, arr, [8, 7, 6, 5])
+const arr2 = arrayRemove(undefined, arr, [8, 7, 6, 5])
 // [1, 2, 3, 4]
 ```
 
-## 项目结构
+## Structure
 
-- ★: 实现已测试
-- ☆: 实现未测试
-- \[empty\]: 未实现
+- ★: finished, tested
+- ☆: finished, testing
+- \[empty\]: finishing
 
 ``` 
 /-src
-|- [★]array.ts/
-|  |- [★Function]isArr
-|  |- [★Function]toArr
-|  |- [★Function]arrAdd
-|  |- [★Function]arrRemove
+|- [★]array/
+|  |- [★Function]toArray
+|  |- [★Function]arrayAdd
+|  |- [★Function]arrayRemove
+|  |- [★Function]arrayIncludes
 |  |-...
 |
-|- [★]object.ts/
-|  |- [★Function]isObj
-|  |- [★Function]objHas
-|  |- [★Function]objGet
+|- [★]const/
 |  |-...
 |
-|- [★]string.ts/
-|  |- [★Function]isStr
+|- [☆]dom/
+|  |- [☆Function]copyToClipBoard
+|  |- [☆Function]download
+|  |- [☆Function]downloadAsFile
+|  |- [☆Function]downloadAsCsv
+|  |- [☆Function]getOffset
+|  |- [☆Function]getOffsetFromBody
 |  |-...
 |
-|- [★]math.ts/
-|  |- [★Function]c
-|  |- [★Function]a
+|- [☆]math/
+|  |- [☆Function]a
+|  |- [☆Function]c
+|  |- [-Function]aPick
 |  |- [☆Function]cPick
-|  |- [Function]aPick
 |  |-...
 |
-|- []color.ts/
-```
-
-
-## 构建发布
-
-``` bash
-$ yarn test
-$ yarn build
-
-$ npm config set registry your_registry_address
-$ npm login 
-$ npm publish --access public
+|- [☆]number/
+|  |- [★Enum]NumberFormatEnum
+|  |- [☆Function]numberFormat
+|  |-...
+|
+|- [☆]object/
+|  |- [☆Function]objectHas
+|  |- [☆Function]objectGet
+|  |- [☆Function]objectGetDefaultNull
+|  |- [☆Function]reverseKeyValue
+|  |- [☆Function]reverseEntries
+|  |- [☆Function]toTree
+|  |- [☆Function]flattenTree
+|  |- [☆Function]findTreeParent
+|  |- [☆Function]findTreeParentFromList
+|  |-...
+|
+|- [☆]operator/
+|  |- [☆Function]curry
+|  |- [☆Function]equal
+|  |- [☆Function]is
+|  |- [☆Function]not
+|  |- [☆Function]deepEqual
+|  |- [☆Function]identity
+|  |- [☆Function]noop
+|  |- [☆Function]no
+|  |- [☆Function]toRawType
+|  |- [☆Function]isDefind
+|  |- [☆Function]isObject
+|  |- [☆Function]isPlainObject
+|  |- [☆Function]isString
+|  |- [☆Function]isNumber
+|  |- [☆Function]isSymbol
+|  |- [☆Function]isBoolean
+|  |- [☆Function]isFunction
+|  |- [☆Function]isRegExp
+|  |- [☆Function]isPrimitive
+|  |- [☆Function]isPromise
+|  |- [☆Type]PlainObject
+|  |-...
+|
+|- [☆]string/
+|  |- [☆Function]translateLetter
+|  |- [☆Function]translateByteLetter
+|  |- [☆Function]translateFullByteLetter
+|  |- [☆Function]stringLength
+|  |-...
+|
+|- [☆]process/
+|  |- [☆Function]microDelay
+|  |- [☆Function]macroDelay
+|  |-...
+|
 ```
