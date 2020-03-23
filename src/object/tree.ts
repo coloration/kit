@@ -56,17 +56,15 @@ export function flattenTree<T = any> (
 
   const nodes = Array.isArray(node) ? node : [node]
   let result: T[] = []
-  const defaultOpt = { childrenField: CHILDREN, childValid: (n:T) => n[opt.childrenField].length > 0 }
+  const defaultOpt = { childrenField: CHILDREN, childValid: (n:T) => n[opt.childrenField] && n[opt.childrenField].length > 0 }
   const opt = Object.assign(defaultOpt, option)
 
   function flat (n: T) {
 
-    const hasChild = opt.childValid(n)
+    result.push(n)
 
-    if (hasChild) {
-      const children = n[opt.childrenField]
-      result.concat(children)
-      children.forEach(flat)
+    if (opt.childValid(n)/* hasChild */) {
+      n[opt.childrenField].forEach(flat)
     }
   }
 
