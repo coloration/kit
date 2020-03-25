@@ -1,7 +1,7 @@
 import { 
   objectHas, objectGet 
 
-} from '../dist/object'
+} from '../dist'
 
 let testObject
 

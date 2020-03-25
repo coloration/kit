@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.0.1
+
+### Fix
+
+- The parent node is not in result list of the flattenTree method.
+
 ## 1.0.0
 
 ### Feature

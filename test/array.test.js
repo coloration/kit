@@ -1,6 +1,6 @@
 import {
   toArray, arrayAdd, arrayRemove
-} from '../dist/array'
+} from '../dist'
 
 describe('method test: toArray', () => {
   test('a single number to array', () => {

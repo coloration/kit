@@ -1,4 +1,4 @@
-import { a, c } from '../dist/math'
+import { a, c } from '../dist'
 
 describe('test c', () => {
   test('c32 equal 3', () => expect(c(3, 2)).toBe(3))

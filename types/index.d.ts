@@ -6,3 +6,4 @@ export * from './function';
 export * from './process';
 export * from './operator';
 export * from './math';
+export * from './string';
