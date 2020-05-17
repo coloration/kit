@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.1.0
+
+### Feature
+
+- add `queryToObject` and `objectToQuery` methods
+
+## 1.0.2
+
+### Feature 
+
+- add method `getOffset`, Receive relative parent node & current node, return the relative distance with 'px', `{ width: number, height: number, left: number, right: number }`
+
 ## 1.0.1
 
 ### Fix

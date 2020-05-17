@@ -1,4 +1,4 @@
-import { PlainObject, isObject, curry } from "../operator"
+import { PlainObject, isObject, curry, isPlainObject, isString } from "../operator"
 
 export function objectHas (obj: PlainObject, ...fields: string[]): boolean {
   return fields.every(function (field) {
@@ -31,6 +31,41 @@ export function reverseKeyValue <T = string> (obj: PlainObject<T>): PlainObject<
 
 export function reverseEntries <T = string>(entries: (string | T)[][]) : (string | T)[][] {
   return entries.map(entry => entry.reverse())
+}
+
+
+export function objectToQuery<T = PlainObject> (encode: boolean, object: T): string {
+  
+  if (!isPlainObject(object)) return ''
+  
+  const result = []
+
+  for (const key in object) {
+    const stringValue = JSON.stringify(object[key])
+    const value = encode ? encodeURIComponent(stringValue) : stringValue
+    result.push(`${key}=${value}`)
+  }
+
+  return result.join('&')
+}
+
+export function queryToObject (raw: boolean, query: string): PlainObject {
+  const result = Object.create(null)
+  
+  if (!isString(query)) return result
+  query = query.replace(/^\?/, '')
+
+  return query.split('&').reduce(function (acc, curr) {
+    const p = curr.split('=')
+    if (p.length === 2) {
+      let val = p[1]
+      if (raw) {
+        try { val = JSON.parse(val) } catch (e) {}
+      }
+      acc[p[0]] = val
+    }
+    return acc
+  }, result)
 }
 
 export * from './tree'

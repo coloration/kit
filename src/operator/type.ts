@@ -34,4 +34,8 @@ export function isPromise (v: any): boolean {
   return isDefind(v) && isFunction(v.then) && isFunction(v.catch)
 }
 
+export function isIE () {
+  return !!(window as any).ActiveXObject || "ActiveXObject" in window
+}
+
 export type PlainObject<T = any> = { [key: string]: T }
