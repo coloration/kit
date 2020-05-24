@@ -13,7 +13,7 @@ export function isObject (o: any): boolean {
 }
 
 export function isPlainObject (o: any): boolean {
-  return _toString.call(o) === '[object Object]'
+  return isDefind(o) && !isPrimitive(o)
 }
 
 export const isString = (o: any) => typeof o === 'string'

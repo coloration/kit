@@ -1,5 +1,7 @@
 # Coloration/Kit
 
+- [Document](http://docs.coloration.top/kit/)
+
 项目里常用的工具库函数，可以配合 ramda.js 或者 lodash.js 进行柯里化再使用, 本项目导出的 
 `curry` 不支持占位符功能
 
@@ -20,6 +22,9 @@ const arr = arrAdd([1, 2, 3, 4], [2, 4, 5, 7])
 const arr2 = arrayRemove(undefined, arr, [8, 7, 6, 5])
 // [1, 2, 3, 4]
 ```
+
+
+
 
 ## Structure
 

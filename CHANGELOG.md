@@ -1,5 +1,10 @@
 # Change Log
 
+
+## 1.2.0
+
+- add test 
+
 ## 1.1.0
 
 ### Feature

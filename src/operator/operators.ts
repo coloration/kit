@@ -27,17 +27,18 @@ export function deepEqual (a: any, b: any): boolean {
         return keysA.length === keysB.length && keysA.every(key => {
           return deepEqual(a[key], b[key])
         })
-      } else {
-        return false
       }
+
+      return false
+
     } catch (e) {
       return false
     }
   } else if (!isObjectA && !isObjectB) {
     return String(a) === String(b)
-  } else {
-    return false
-  }
+  } 
+  
+  return false
 }
 
 

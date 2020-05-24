@@ -22,3 +22,5 @@ min
 dist
 lib
 types
+
+coverage
