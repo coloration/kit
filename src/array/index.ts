@@ -53,3 +53,9 @@ export function arrayRemove<T = any> (
     })
   })
 }
+
+
+export function generateArray<T = any> (length?: number, value?: T) {
+  length = length || 0
+  return Array.from({ length }).map((_, i) => value === undefined ? i : value)
+}

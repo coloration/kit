@@ -32,10 +32,16 @@ export const fullToHalfSymbolEntries = [
 ]
 
 export const transformToHalfSymbol: (str: string) => string = 
-  curry(transformLetter, Object.fromEntries(fullToHalfSymbolEntries))
+  curry(
+    transformLetter, 
+    { map: Object.fromEntries(fullToHalfSymbolEntries) }
+  )
   
 export const transformToFullSymbol: (str: string) => string = 
-  curry(transformToHalfSymbol, Object.fromEntries(reverseEntries(fullToHalfSymbolEntries)))
+  curry(
+    transformToHalfSymbol, 
+    { map: Object.fromEntries(reverseEntries(fullToHalfSymbolEntries)) }
+  )
 
 export function stringLength (str: string): number {
   return Array.from(str).length
