@@ -41,7 +41,7 @@ export function objectToQuery<T = PlainObject> (encode: boolean, object: T): str
   const result = []
 
   for (const key in object) {
-    const stringValue = JSON.stringify(object[key])
+    const stringValue = object[key] + ''
     const value = encode ? encodeURIComponent(stringValue) : stringValue
     result.push(`${key}=${value}`)
   }
