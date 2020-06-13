@@ -21,17 +21,31 @@ export function objectGet<V = any, D = undefined> (defaultValue: D, obj: PlainOb
   return value === undefined ? defaultValue : value
 }
 
+export function toEntries<T = any> (obj: any): T[][] {
+  return Object.keys(obj).map(key => ([key, obj[key]]))
+}
+
+export function fromEntries<T = string> (obj: T[][]) : PlainObject<T> {
+  if (!Array.isArray(obj)) return {}
+  return obj.reduce((acc, entry) => { 
+    if (Array.isArray(entry) && entry.length > 1) acc[entry[0] as any] = entry[1]
+    return acc
+  }, {})
+}
+
+export function reverseEntries <T = string>(entries: T[][]) : T[][] {
+  return entries.map(entry => entry.reverse())
+}
+
 export const objectGetDefaultNull: <T = any>(obj: PlainObject, ...fields: string[]) => T | null
   = curry(objectGet, null)
 
 
 export function reverseKeyValue <T = string> (obj: PlainObject<T>): PlainObject<T> {
-  return Object.fromEntries(reverseEntries<T>(Object.entries(obj)))
+  return fromEntries(reverseEntries<T>(toEntries(obj)))
 }
 
-export function reverseEntries <T = string>(entries: (string | T)[][]) : (string | T)[][] {
-  return entries.map(entry => entry.reverse())
-}
+
 
 
 export function objectToQuery<T = PlainObject> (encode: boolean, object: T): string {

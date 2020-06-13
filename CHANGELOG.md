@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.3.0
+
+### Optimize
+
+add `toEntries` and `fromEntries` methods to replace `Object.fromEntries`, `Object.entries`
+
+## 1.2.1
+
+### fix
+
+`queryToObject` `queryToObject` without JSON.stringify
+
 
 ## 1.2.0
 
