@@ -1,5 +1,5 @@
-import { PlainObject, curry } from "../operator";
-import { reverseEntries } from "../object";
+import { PlainObject, curry } from "../operator/index"
+import { reverseEntries } from "../object/index"
 
 export function transformLetter (
   options: { map?: PlainObject<string>, flag?: string } | undefined, 

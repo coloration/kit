@@ -20,7 +20,7 @@ yarn-error.log*
 *.sw*
 min
 dist
-lib
 types
+esm
 
 coverage

@@ -1,4 +1,4 @@
-import { curry } from '../operator'
+import { curry } from '../operator/index'
 
 export type HTMLElementPosition = {
   left: number, top: number, width: number, height: number

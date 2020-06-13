@@ -1,4 +1,4 @@
-import { PlainObject, isObject, curry, isPlainObject, isString } from "../operator"
+import { PlainObject, isObject, curry, isPlainObject, isString } from "../operator/index"
 
 export function objectHas (obj: PlainObject, ...fields: string[]): boolean {
   return fields.every(function (field) {

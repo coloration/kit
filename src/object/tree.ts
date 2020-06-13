@@ -1,7 +1,7 @@
 
-import { identity, isString, curry } from '../operator'
-import { ID, PID, CHILDREN, PARENT } from '../const'
-import { arrayRemove } from '../array'
+import { identity, isString, curry } from '../operator/index'
+import { ID, PID, CHILDREN, PARENT } from '../const/index'
+import { arrayRemove } from '../array/index'
 
 export type ToTreeOption<T = any> = {
   idField?: string, 

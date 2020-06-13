@@ -2,6 +2,11 @@
 
 ## 1.3.0
 
+### Optimization
+
+- build with rollup for minisize
+- fix module export 
+
 ### Optimize
 
 add `toEntries` and `fromEntries` methods to replace `Object.fromEntries`, `Object.entries`

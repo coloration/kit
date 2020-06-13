@@ -1,4 +1,4 @@
-import { not, is } from '../operator'
+import { not, is } from '../operator/index'
 
 export type ExistValidFunc<T = any> = undefined | ((oItem: T, item: T) => boolean)
 
