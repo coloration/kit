@@ -1,5 +1,23 @@
 # Change Log
 
+## 1.4.0
+
+### Feature
+
+- add `frameLoop(delay: Number = 0, fn: (times: number, lastTick: number, totalTick: number) => any) => cancel<Function>` method, implement with `requestAnimationFrame`
+- add `defaultValue(presetValue, value) => value | presetValue` method
+
+### Optimization
+
+- add `keepChildren: Boolean = false` to `flattenTree` methods.  
+
+
+## 1.3.1
+
+### Optimization
+
+- replace bundle tool to rollup 
+
 ## 1.3.0
 
 ### Optimization

@@ -11,7 +11,7 @@ export type ToTreeOption<T = any> = {
    * cant use JSON stringify when we set the parent field.
    * skip it with "null"
    */
-  parentField?: string | null, 
+  parentField?: string, 
   childValid?: (parent: T, childLike: T) => boolean 
 }
 
@@ -50,13 +50,17 @@ export function toTree<T = any, K = T> (
 }
 
 export function flattenTree<T = any> (
-  option: { childrenField?: string, childValid?: (n: T) => boolean }, 
+  option: { childrenField?: string, childValid?: (n: T) => boolean, keepChildren?: boolean }, 
   node: T | T[]
 ) {
 
   const nodes = Array.isArray(node) ? node : [node]
   let result: T[] = []
-  const defaultOpt = { childrenField: CHILDREN, childValid: (n:T) => n[opt.childrenField] && n[opt.childrenField].length > 0 }
+  const defaultOpt = { 
+    childrenField: CHILDREN, 
+    childValid: (n:T) => n[opt.childrenField] && n[opt.childrenField].length > 0,
+    keepChildren: false
+  }
   const opt = Object.assign(defaultOpt, option)
 
   function flat (n: T) {
@@ -65,6 +69,7 @@ export function flattenTree<T = any> (
 
     if (opt.childValid(n)/* hasChild */) {
       n[opt.childrenField].forEach(flat)
+      if (!opt.keepChildren) delete n[opt.childrenField]
     }
   }
 

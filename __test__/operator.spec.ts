@@ -21,7 +21,9 @@ import {
   no,
 
   curry,
-  equal
+  equal,
+
+  defaultValue
 
 } from '../src/operator'
 
@@ -327,5 +329,16 @@ describe('equal', () => {
       { id: 5, category: 4, name: 'fruit' },
       { id: 5, category: 5, name: 'fruit' },
     )).toBe(false)
+  })
+})
+
+describe('defaultValue', () =>{
+
+  test ('simple use', () => {
+    expect(defaultValue(10, 0)).toBe(0)
+    expect(defaultValue(10, null)).toBe(10)
+    expect(defaultValue(10, undefined)).toBe(10)
+
+    expect(defaultValue('-', '')).toBe('')
   })
 })
