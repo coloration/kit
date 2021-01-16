@@ -26,16 +26,32 @@ export function isRegExp (o: any): boolean {
   return _toString.call(o) === '[object RegExp]'
 }
 
-export function isPrimitive (v: any): boolean {
-  return isString(v) || isNumber(v) || isSymbol(v) || isBoolean(v)
+export function isPrimitive (o: any): boolean {
+  return isString(o) || isNumber(o) || isSymbol(o) || isBoolean(o)
 }
 
-export function isPromise (v: any): boolean {
-  return isDefind(v) && isFunction(v.then) && isFunction(v.catch)
+export function isPromise (o: any): boolean {
+  return isDefind(o) && isFunction(o.then) && isFunction(o.catch)
 }
 
-export function isIE () {
+export function isIE (): boolean {
   return !!(window as any).ActiveXObject || "ActiveXObject" in window
+}
+
+export function isFalsy (o: any) : boolean {
+  return !isDefind(o) || ['', 0, false, NaN, /* 0n */].includes(o)
+}
+
+export function isTruthy (o: any): boolean {
+  return !isFalsy(o)
+}
+
+export function isEmptyArray (o: any): boolean {
+  return Array.isArray(o) ? o.length === 0 : false
+}
+
+export function isEmptyPlainObject (o: any): boolean {
+  return isPlainObject(o) ? Object.keys(o).length === 0 : false
 }
 
 export type PlainObject<T = any> = { [key: string]: T }

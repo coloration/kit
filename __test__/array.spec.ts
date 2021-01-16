@@ -1,5 +1,5 @@
 import {
-  toArray, arrayAdd, arrayRemove, arrayIncludes
+  toArray, arrayAdd, arrayRemove, arrayIncludes, arrayPick, arrayRepeat
 } from '../src/array'
 
 describe('method test: toArray', () => {
@@ -138,4 +138,39 @@ describe('method test: array includes', () => {
 
   })
 
+})
+
+
+describe('test array repeat', () => {
+
+  test('generate array width value', () => {
+
+    const length = 7
+    const contentNum = 5
+    const array = arrayRepeat(length, contentNum)
+    expect(array.length).toBe(length)
+    expect(array.reduce((acc, n) => (acc + n), 0)).toBe(length * contentNum)
+
+  })
+
+  test('generate array width function', () => {
+
+    const length = 4
+    
+    const array = arrayRepeat(length, (_, i, array) => i * array.length)
+    expect(array.reduce((acc, n) => (acc + n), 0)).toBe(0 + 4 + 8 + 12)
+
+  })
+})
+
+
+describe('test array pick', () => {
+
+  test('generate array', () => {
+    
+    const res = arrayPick('value', [{ name: '1', value: 1 }, { name: '2', value: 2 }])
+
+    expect(res.reduce((acc, n) => (acc + n), 0)).toBe(1 + 2)
+
+  })
 })

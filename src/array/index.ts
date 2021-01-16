@@ -1,4 +1,4 @@
-import { not, is } from '../operator/index'
+import { not, is, isPrimitive, isFunction } from '../operator/index'
 
 export type ExistValidFunc<T = any> = undefined | ((oItem: T, item: T) => boolean)
 
@@ -28,7 +28,7 @@ export function arrayIncludes<T = any, K = T> (
   existValid: undefined | ((oItem: T, item: K) => boolean),
   o: T[],
   item: K | K[]
-) {
+): boolean {
   const valid = existValid || is
   const items = toArray(item)
 
@@ -43,7 +43,7 @@ export function arrayRemove<T = any> (
   existValid: undefined | ((o: T, item: T) => boolean),
   o: T[],
   item: T | T[]
-) {
+): T[] {
   const items = toArray(item)
   const valid = existValid || is
 
@@ -54,8 +54,16 @@ export function arrayRemove<T = any> (
   })
 }
 
+export function arrayRepeat<T = any> (
+  length?: number, 
+  value?: T | ((_: undefined, index: number, array: undefined[]) => T)
+) : T[] {
 
-export function generateArray<T = any> (length?: number, value?: T) {
   length = length || 0
-  return Array.from({ length }).map((_, i) => value === undefined ? i : value)
+  const g = (_: unknown, i: number) => value === undefined ? i : value
+  return Array.from({ length }).map((isFunction(value) ? value : g) as any)
+}
+
+export function arrayPick<T = any> (field: string, array: any[]) : T[] {
+  return array.map(item => isPrimitive(item) ? undefined : item[field])
 }

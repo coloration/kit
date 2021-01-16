@@ -7,10 +7,6 @@ export type ToTreeOption<T = any> = {
   idField?: string, 
   pidField?: string, 
   childrenField?: string, 
-  /*
-   * cant use JSON stringify when we set the parent field.
-   * skip it with "null"
-   */
   parentField?: string, 
   childValid?: (parent: T, childLike: T) => boolean 
 }
@@ -24,7 +20,7 @@ export function toTree<T = any, K = T> (
     idField: ID, 
     pidField: PID, 
     childrenField: CHILDREN, 
-    parentField: PARENT,
+    /* parentField: PARENT, */
     childValid: (parent: T, childLike: T) => parent[opt.idField] === childLike[opt.pidField]
   }
   const opt = Object.assign(defaultOpt, option)

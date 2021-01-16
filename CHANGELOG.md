@@ -4,12 +4,33 @@
 
 ### Feature
 
+- arrayRepeat: `fn(2, 'hi')` to `['hi', 'hi']` 
+- arrayPick: `fn('v', [{ v: 7 }, {}, { v: 2 }])` to `[7, undefined, 2]`
+- objectMapping
+- pureObject
+- constPureObject
+- isFalsy
+- isTruthy
+- isEmptyArray
+- isEmptyPlainObject
+- delay
+- debounce
+- throttle
+
+### Optimization
+
+- remove `parentField` option default in `toTree` function 
+
+## 1.4.0
+
+### Feature
+
 - add `frameLoop(delay: Number = 0, fn: (times: number, lastTick: number, totalTick: number) => any) => cancel<Function>` method, implement with `requestAnimationFrame`
 - add `defaultValue(presetValue, value) => value | presetValue` method
 
 ### Optimization
 
-- add `keepChildren: Boolean = false` to `flattenTree` methods.  
+- add `keepChildren: Boolean = false` option to `flattenTree` methods.  
 
 
 ## 1.3.1

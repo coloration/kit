@@ -12,6 +12,10 @@ import {
   isPromise,
   isPrimitive,
   isIE,
+  isFalsy,
+  isTruthy,
+  isEmptyArray,
+  isEmptyPlainObject,
 
   is,
   not,
@@ -340,5 +344,41 @@ describe('defaultValue', () =>{
     expect(defaultValue(10, undefined)).toBe(10)
 
     expect(defaultValue('-', '')).toBe('')
+  })
+})
+
+describe('falsy and truthy', () =>{
+
+  test ('simple use', () => {
+    expect(isFalsy(0)).toBe(true)
+    expect(isFalsy(false)).toBe(true)
+    expect(isFalsy('')).toBe(true)
+    expect(isFalsy(NaN)).toBe(true)
+    
+    expect(isTruthy(0)).toBe(false)
+    expect(isTruthy(false)).toBe(false)
+    expect(isTruthy('')).toBe(false)
+    expect(isTruthy(NaN)).toBe(false)
+  })
+})
+
+describe('isEmptyArray', () =>{
+
+  test ('simple use', () => {
+    expect(isEmptyArray(0)).toBe(false)
+    expect(isEmptyArray([undefined])).toBe(false)
+    expect(isEmptyArray(new Array(3))).toBe(false)
+    expect(isEmptyArray([])).toBe(true)
+  })
+})
+
+describe('isEmptyObject', () =>{
+
+  
+  test ('simple use', () => {
+    expect(isEmptyPlainObject(0)).toBe(false)
+    expect(isEmptyPlainObject([])).toBe(false)
+    expect(isEmptyPlainObject(Object.create(null))).toBe(true)
+    expect(isEmptyPlainObject({})).toBe(true)
   })
 })

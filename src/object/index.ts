@@ -1,4 +1,4 @@
-import { PlainObject, isObject, curry, isPlainObject, isString } from "../operator/index"
+import { PlainObject, isObject, curry, isPlainObject, isString, isDefind } from "../operator/index"
 
 export function objectHas (obj: PlainObject, ...fields: string[]): boolean {
   return fields.every(function (field) {
@@ -9,7 +9,11 @@ export function objectHas (obj: PlainObject, ...fields: string[]): boolean {
   })
 }
 
-export function objectGet<V = any, D = undefined> (defaultValue: D, obj: PlainObject, ...fields: string[]) {
+export function objectGet<V = any, D = undefined> (
+  defaultValue: D, 
+  obj: PlainObject, 
+  ...fields: string[]
+) {
 
   if (!isObject(obj)) return defaultValue
   let value: V
@@ -19,6 +23,23 @@ export function objectGet<V = any, D = undefined> (defaultValue: D, obj: PlainOb
   })
 
   return value === undefined ? defaultValue : value
+}
+
+export function objectMapping<T = any, K = any> (
+  option: { deep: boolean, keepOthers: boolean },
+  map: { [key: string]: string },
+  obj: T
+) {
+  const opt = Object.assign({ deep: false, keepOthers: false }, option)
+  const mp = Object.assign({}, map)
+
+  return Object.keys(obj)
+  .filter(k => isDefind(mp[k]) || opt.keepOthers)
+  .reduce((o, k) => {
+    const child = obj[k]
+    o[mp[k] || k] = opt.deep && isPlainObject(child) ? objectMapping(opt, mp, child) : child
+    return o
+  }, {}) as K
 }
 
 export function toEntries<T = any> (obj: any): T[][] {
@@ -45,8 +66,18 @@ export function reverseKeyValue <T = string> (obj: PlainObject<T>): PlainObject<
   return fromEntries(reverseEntries<T>(toEntries(obj)))
 }
 
+export function pureObject<T = any> (v: T) {
+  return isPlainObject(v) 
+    ? Object.keys(v).reduce((obj, k) => {
+        obj[k] = v[k]
+        return obj
+      }, Object.create(null))
+    : v
+}
 
-
+export function constPureObject<T = any> (v: T) {
+  return Object.freeze(pureObject(v))
+}
 
 export function objectToQuery<T = PlainObject> (encode: boolean, object: T): string {
   
