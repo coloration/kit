@@ -1,4 +1,4 @@
-import { not, is, isPrimitive, isFunction } from '../operator/index'
+import { not, is, isPrimitive, isFunction, isEmptyArray, isNumber } from '../operator/index'
 
 export type ExistValidFunc<T = any> = undefined | ((oItem: T, item: T) => boolean)
 
@@ -54,6 +54,11 @@ export function arrayRemove<T = any> (
   })
 }
 
+/**
+ * generate simple array with default value and length
+ * @param length the length of generated array
+ * @param value default value filled in array
+ */
 export function arrayRepeat<T = any> (
   length?: number, 
   value?: T | ((_: undefined, index: number, array: undefined[]) => T)
@@ -66,4 +71,33 @@ export function arrayRepeat<T = any> (
 
 export function arrayPick<T = any> (field: string, array: any[]) : T[] {
   return array.map(item => isPrimitive(item) ? undefined : item[field])
+}
+
+export function arraySlice<T = any> (array: T[], start: number, end?: number) : T[] {
+  if (!Array.isArray(array)) return array
+  
+  const leng = array.length
+
+  if (leng === 0 || !isNumber(end) || !isNumber(start) || end < start) return array.slice(start, end)
+  
+
+  while(start < 0) {
+    start += leng
+    end += leng
+  }
+
+  while(start >= leng) {
+    start -= leng
+    end -= leng
+  }
+
+  let result = []
+  
+  do {
+    result = result.concat(array.slice(start, end <= leng ? end : leng))
+    start = 0
+    end -= leng
+  } while (end > 0) 
+
+  return result
 }

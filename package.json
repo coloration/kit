@@ -1,13 +1,12 @@
 {
   "name": "@coloration/kit",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "main": "lib/index.js",
   "module": "esm/index.js",
   "typings": "types/index.d.ts",
   "scripts": {
     "test": "jest --coverage",
-    "build": "rm -rf types & tsc & rollup -c",
-    "publish": "npm publish --access public"
+    "build": "rm -rf types & tsc & rollup -c"
   },
   "repository": {
     "type": "git",

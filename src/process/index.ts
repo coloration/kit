@@ -41,7 +41,7 @@ export function macroDelay (fn: (...args: any[]) => any) {
 export function delay<T = Function> (time: number, fn: T) {
   return function (...args: any[]) {
     const timer = setTimeout(() => {
-      isFunction(fn) && (fn as any).call(null, args)
+      isFunction(fn) && (fn as any).apply(null, args)
     }, time)
 
     return function dispose () {
@@ -59,7 +59,7 @@ export function debounce<T = Function> (time: number, fn: T) {
     if (!enable) return
     clearTimeout(timer)
     timer = setTimeout(() => {
-      isFunction(fn) && (fn as any).call(null, args)
+      isFunction(fn) && (fn as any).apply(null, args)
     }, time)
 
     return function dispose (enable = true) {
@@ -77,7 +77,7 @@ export function throttle<T = Function> (time: number, fn: T) {
   return function (...args: any) {
     if (doing || !enable) return
 
-    isFunction(fn) && (fn as any).call(null, args)
+    isFunction(fn) && (fn as any).apply(null, args)
 
     const timer = setTimeout(() => {
       doing = false

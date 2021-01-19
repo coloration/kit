@@ -1,6 +1,17 @@
 # Change Log
 
-## 1.4.0
+## 1.6.0
+
+### Feature
+
+- add `arraySlice(array, start, end)` method. support negative number and over length's number
+
+### Fix
+
+- delay, debounce throttle bug of argument pass
+
+
+## 1.5.0
 
 ### Feature
 
