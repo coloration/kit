@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.1
+
+## Fix
+
+- can't custom field to `toTree` 
+
 ## 1.6.0
 
 ### Feature

@@ -21,7 +21,7 @@ export function toTree<T = any, K = T> (
     pidField: PID, 
     childrenField: CHILDREN, 
     /* parentField: PARENT, */
-    childValid: (parent: T, childLike: T) => parent[opt.idField] === childLike[opt.pidField]
+    childValid: (parent: T, childLike: T) => parent[defaultOpt.idField] === childLike[defaultOpt.pidField]
   }
   const opt = Object.assign(defaultOpt, option)
   const result:K[] = []
