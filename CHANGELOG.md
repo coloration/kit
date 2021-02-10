@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.6.2
+
+### Opt
+
+- replace `Object.fromEntries` with `fromEntries` in `transformToFullSymbol`, `transformToHalfSymbol`
+
 ## 1.6.1
 
 ## Fix

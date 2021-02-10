@@ -1,6 +1,5 @@
 import { PlainObject, curry } from "../operator/index"
-import { reverseEntries } from "../object/index"
-
+import { fromEntries, reverseEntries } from "../object/index"
 export function transformLetter (
   options: { map?: PlainObject<string>, flag?: string } | undefined, 
   str: string): string {
@@ -34,13 +33,13 @@ export const fullToHalfSymbolEntries = [
 export const transformToHalfSymbol: (str: string) => string = 
   curry(
     transformLetter, 
-    { map: Object.fromEntries(fullToHalfSymbolEntries) }
+    { map: fromEntries(fullToHalfSymbolEntries) }
   )
   
 export const transformToFullSymbol: (str: string) => string = 
   curry(
     transformToHalfSymbol, 
-    { map: Object.fromEntries(reverseEntries(fullToHalfSymbolEntries)) }
+    { map: fromEntries(reverseEntries(fullToHalfSymbolEntries)) }
   )
 
 export function stringLength (str: string): number {
