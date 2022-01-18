@@ -1,9 +1,10 @@
 {
   "name": "@coloration/kit",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "main": "lib/index.js",
   "module": "esm/index.js",
   "typings": "types/index.d.ts",
+  "files": ["lib", "esm", "types", "dist"],
   "scripts": {
     "test": "jest --coverage",
     "build": "rm -rf types & tsc & rollup -c"

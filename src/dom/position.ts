@@ -1,26 +1,24 @@
-import { curry } from '../operator/index'
+import { curry, isWebEnv } from '../operator/index'
 
 export type HTMLElementPosition = {
   left: number, top: number, width: number, height: number
 }
 
 export function getOffset (parentDom: HTMLElement, dom: HTMLElement): HTMLElementPosition {
+  const def = { width: 0, height: 0, left: 0, top: 0 }
+  if (!isWebEnv()) return def
 
-  let left = 0
-  let top = 0
-  const width = dom.offsetWidth
-  const height = dom.offsetHeight
+  def.width = dom.offsetWidth
+  def.height = dom.offsetHeight
   while (dom && dom !== parentDom) {
-    
-    left += dom.offsetLeft
-    top += dom.offsetTop
+    def.left = def.left + dom.offsetLeft
+    def.top = def.top + dom.offsetTop
     dom = dom.offsetParent as HTMLElement
-    
   }
 
-  return { width, height, left, top }
+  return def
 
 }
 
 export const getOffsetFromBody: (dom: HTMLElement) => HTMLElementPosition 
-  = curry(getOffset, document.body)
+  = curry(getOffset, isWebEnv() ? globalThis.document.body : globalThis)

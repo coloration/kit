@@ -1,5 +1,8 @@
+import { isWebEnv } from "../operator"
+
 export function download (filename: string, content: any) {
-  const link = document.createElement('a')
+  if (!isWebEnv()) return
+  const link = globalThis.document.createElement('a')
   link.href = content
   link.download = filename
   link.click()

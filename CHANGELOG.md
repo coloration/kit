@@ -1,5 +1,18 @@
 # Change Log
 
+## 1.7.0
+
+### Feature
+
+- add `transpose` function. 
+- add some number functions.
+- add `suffixCrc` function for RS485 protocol.
+
+``` js
+transpose([1, 2, 3], [4, 5, 6]) 
+// [[1, 4], [2, 5], [3, 6]]
+```
+
 ## 1.6.2
 
 ### Opt

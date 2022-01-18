@@ -1,3 +1,5 @@
+import { arrayRepeat } from '../array'
+
 export function a (m: number, n: number) {
   let x = 1
   let max = Math.max(n, m)
@@ -52,4 +54,21 @@ export function cPick<T> (nColl: T[], m: number): T[][] {
   }
 
   return result 
+}
+
+
+export function transpose<T = any>(martix: T[][], filled?: T) {
+  const rowLength = martix.length
+  const colLength = martix.reduce((len, row) => {
+    return row.length > len ? row.length : len
+  }, 0)
+
+  return arrayRepeat(colLength).map((_, i) => {
+    return arrayRepeat(rowLength).reduce((acc, _, j) => {
+      if (martix?.[j]?.[i] || filled)
+        acc.push(martix?.[j]?.[i] ?? filled)
+
+      return acc
+    }, [])
+  })
 }

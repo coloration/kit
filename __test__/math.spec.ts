@@ -1,4 +1,4 @@
-import { a, c, cPick } from '../src/math'
+import { a, c, cPick, transpose } from '../src/math'
 
 describe('test c', () => {
   test('c32 equal 3', () => expect(c(3, 2)).toBe(3))
@@ -34,5 +34,16 @@ describe('test cPick', () => {
     })).toBe(true)
     expect(result.length).toBe(collection.length)
 
+  })
+})
+
+describe('test transpose', () => {
+  const result = transpose([[1, 2, 3], [4, 5, 6]])
+  expect(Array.isArray(result)).toBe(true)
+  expect(result.length).toBe(3)
+  result.forEach((row, i) => {
+    expect(row.length).toBe(2)
+    expect(row[0]).toBe(1 + i)
+    expect(row[1]).toBe(4 + i)
   })
 })

@@ -17,14 +17,18 @@ export function isPlainObject (o: any): boolean {
 }
 
 export const isString = (o: any) => typeof o === 'string'
-export const isNumber = (o: any) => typeof o === 'number'
+// NaN
+export const isNumber = (o: any) => toRawType(o) === 'Number'
 export const isSymbol = (o: any) => typeof o === 'symbol'
 export const isBoolean = (o: any) => typeof o === 'boolean'
 export const isFunction = (o: any) => typeof o === 'function'
 
-export function isRegExp (o: any): boolean {
-  return _toString.call(o) === '[object RegExp]'
-}
+export const isArrayBuffer = (o: any) => toRawType(o) === 'ArrayBuffer'
+
+export const isRegExp = (o: any) => toRawType(o) === 'RegExp'
+
+export const isNumberLike = (o: any) => isNumber(Number(o))
+
 
 export function isPrimitive (o: any): boolean {
   return isString(o) || isNumber(o) || isSymbol(o) || isBoolean(o)
@@ -44,6 +48,14 @@ export function isFalsy (o: any) : boolean {
 
 export function isTruthy (o: any): boolean {
   return !isFalsy(o)
+}
+
+export function isNodeEnv (): boolean {
+  return !!globalThis.process
+}
+
+export function isWebEnv (): boolean {
+  return !!globalThis.document
 }
 
 export function isEmptyArray (o: any): boolean {
