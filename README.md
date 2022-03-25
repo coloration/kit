@@ -1,6 +1,6 @@
 # Coloration/Kit
 
-- [Document](http://docs.coloration.top/kit/)
+- [Document](https://coloration.github.io/#/kit)
 
 
 #### Start Up
