@@ -1,4 +1,4 @@
-import { isWebEnv } from "../operator"
+import { isWebEnv } from '../operator'
 
 export function download (filename: string, content: any) {
   if (!isWebEnv()) return
@@ -33,5 +33,5 @@ export const downloadWithDataurl = (filename: string, content: string) => {
   const blob = new Blob([u8arr], { type: mime })
   const objUrl = URL.createObjectURL(blob)
 
-  download(objUrl, filename)
+  download(filename, objUrl)
 }

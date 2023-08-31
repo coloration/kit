@@ -2,6 +2,7 @@
 import { identity, isString, curry } from '../operator/index'
 import { ID, PID, CHILDREN, PARENT } from '../const/index'
 import { arrayRemove } from '../array/index'
+import { objectGet } from '.'
 
 export type ToTreeOption<T = any> = {
   idField?: string, 
@@ -21,7 +22,8 @@ export function toTree<T = any, K = T> (
     pidField: PID, 
     childrenField: CHILDREN, 
     /* parentField: PARENT, */
-    childValid: (parent: T, childLike: T) => parent[defaultOpt.idField] === childLike[defaultOpt.pidField]
+    childValid: (parent: T, childLike: T) => 
+      (parent as any)[defaultOpt.idField] === (childLike as any)[defaultOpt.pidField]
   }
   const opt = Object.assign(defaultOpt, option)
   const result:K[] = []
@@ -30,11 +32,11 @@ export function toTree<T = any, K = T> (
     const parent = arr.find(item => opt.childValid(item, node))
 
     if (parent) {
-      if (isString(opt.parentField)) node[opt.parentField] = parent
-      if (!Array.isArray(parent[opt.childrenField])) {
-        parent[opt.childrenField] = []
+      if (isString(opt.parentField)) (node as any)[opt.parentField] = parent
+      if (!Array.isArray((parent as any)[opt.childrenField])) {
+        (parent as any)[opt.childrenField] = []
       }
-      parent[opt.childrenField].push(node)
+      (parent as any)[opt.childrenField].push(node)
     }
     else {
       result.push(node as any)
@@ -54,7 +56,7 @@ export function flattenTree<T = any> (
   let result: T[] = []
   const defaultOpt = { 
     childrenField: CHILDREN, 
-    childValid: (n:T) => n[opt.childrenField] && n[opt.childrenField].length > 0,
+    childValid: (n:T) => (n as any)[opt.childrenField] && (n as any)[opt.childrenField].length > 0,
     keepChildren: false
   }
   const opt = Object.assign(defaultOpt, option)
@@ -64,8 +66,8 @@ export function flattenTree<T = any> (
     result.push(n)
 
     if (opt.childValid(n)/* hasChild */) {
-      n[opt.childrenField].forEach(flat)
-      if (!opt.keepChildren) delete n[opt.childrenField]
+      (n as any)[opt.childrenField].forEach(flat)
+      if (!opt.keepChildren) delete (n as any)[opt.childrenField]
     }
   }
 
@@ -86,7 +88,7 @@ export function findTreeParent<T> (
   const opt = Object.assign(defaultOpt, option)
 
   if (opt.valid(node)) return node
-  const parent = node[opt.parentField]
+  const parent = (node as any)[opt.parentField]
   return parent ? findTreeParent(opt, parent) : null
 }
 
@@ -105,7 +107,7 @@ export function findTreeParentFromList<T> (
   const defaultOpt = { 
     pidField: PID, 
     idField: ID, 
-    parentValid: (parentLike: T, child: T) => parentLike[ID] === child[PID],
+    parentValid: (parentLike: T, child: T) => (parentLike as any)[ID] === (child as any)[PID],
     valid: identity
   }
   const opt = Object.assign(defaultOpt, option)

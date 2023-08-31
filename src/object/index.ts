@@ -16,7 +16,7 @@ export function objectGet<V = any, D = undefined> (
 ) {
 
   if (!isObject(obj)) return defaultValue
-  let value: V
+  let value: V = defaultValue as any
 
   fields.some(function (field) {
     return (value = obj = obj[field]) === undefined
@@ -33,10 +33,10 @@ export function objectMapping<T = any, K = any> (
   const opt = Object.assign({ deep: false, keepOthers: false }, option)
   const mp = Object.assign({}, map)
 
-  return Object.keys(obj)
+  return Object.keys(obj as any)
   .filter(k => isDefind(mp[k]) || opt.keepOthers)
-  .reduce((o, k) => {
-    const child = obj[k]
+  .reduce((o: any, k) => {
+    const child = (obj as any)[k]
     o[mp[k] || k] = opt.deep && isPlainObject(child) ? objectMapping(opt, mp, child) : child
     return o
   }, {}) as K
@@ -51,7 +51,7 @@ export function fromEntries<T = string> (obj: T[][]) : PlainObject<T> {
   return obj.reduce((acc, entry) => { 
     if (Array.isArray(entry) && entry.length > 1) acc[entry[0] as any] = entry[1]
     return acc
-  }, {})
+  }, {} as any)
 }
 
 export function reverseEntries <T = string>(entries: T[][]) : T[][] {
@@ -68,8 +68,8 @@ export function reverseKeyValue <T = string> (obj: PlainObject<T>): PlainObject<
 
 export function pureObject<T = any> (v: T) {
   return isPlainObject(v) 
-    ? Object.keys(v).reduce((obj, k) => {
-        obj[k] = v[k]
+    ? Object.keys(v as any).reduce((obj, k) => {
+        obj[k] = (v as any)[k]
         return obj
       }, Object.create(null))
     : v
@@ -94,7 +94,13 @@ export function objectToQuery<T = PlainObject> (encode: boolean, object: T): str
   return result.join('&')
 }
 
-export function queryToObject (raw: boolean, query: string): PlainObject {
+/**
+ * 
+ * @param raw  try to JSON.parse() the field value
+ * @param query 'id=5&age=20'
+ * @returns if 'raw' field is `true` { id: 5, age: 20 } else { id: '5', age: '20' }
+ */
+export function queryToObject<T = PlainObject> (raw: boolean, query: string): T {
   const result = Object.create(null)
   
   if (!isString(query)) return result

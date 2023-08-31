@@ -48,9 +48,10 @@ export function stringLength (str: string): number {
 
 
 export function stringByteLength (str: string): number {
+  if (str === '') return 0
   return Array.from(str).reduce((l , s) => {
     let sl = 0
-    let remain = s.codePointAt(0)
+    let remain = s.codePointAt(0)!
     while (remain > 1) {
       remain /= 255
       sl++

@@ -1,5 +1,5 @@
 import { format } from 'd3-format'
-import { isNumberLike } from '../operator'
+import { isNumber, isNumberLike, isString } from '../operator'
 // https://observablehq.com/@d3/d3-format
 
 /**
@@ -122,4 +122,124 @@ export function numberPrefix (
     r = placeholder + r
   }
   return r 
+}
+
+export function numberToDouble(n: any) {
+  return numberPrefix(undefined, 2, n)
+}
+
+export function numberIntegerLength(n: number) {
+  return (String(n).split('.')[0] || '').length
+}
+
+export function numberDecimalLength(n: number) {
+  return (String(n).split('.')[1] || '').length
+}
+
+
+export function numberNTo10(radix: number, num: string): number {
+  if (!isString(num)) throw new Error()
+  if (!num || !radix || radix === 10) return Number(num)
+  if (radix < 2 || radix > 36) { throw new TypeError('The radix range is limited to 2-36.') }
+
+  num = num.trim()
+  let isPositive = true
+  if (/^[+-]/.test(num)) {
+    isPositive = /^[+]/.test(num)
+    num = num.slice(1)
+  }
+  if (radix === 16 && /^0x/.test(num)) {
+    num = num.slice(2)
+  }
+  num = num.replace(/^0/, '')
+
+  function exchange(letter: string) {
+    const code = letter.charCodeAt(0)
+    if (letter >= 'A' && letter <= 'Z') {
+      return code - 'A'.charCodeAt(0) + 10
+    } else if (letter >= 'a' && letter <= 'z') {
+      return code - 'a'.charCodeAt(0) + 10
+    } else {
+      return code - '0'.charCodeAt(0)
+    }
+  }
+
+  let total = 0
+  const str = num.toString()
+  const integer = str.split('.')[0] ? str.split('.')[0].split('') : []
+  const decimal = str.split('.')[1] ? str.split('.')[1].replace(/0+$/, '').split('') : []
+
+  for (const [index, letter] of integer.entries()) {
+    const num = radix > 10 ? exchange(letter) : +letter
+    total += num * Math.pow(radix, integer.length - index - 1)
+  }
+
+  for (const [index, letter] of decimal.entries()) {
+    const num = radix > 10 ? exchange(letter) : +letter
+    if (isPositive) {
+      total += num * Math.pow(radix, -(index + 1))
+    } else {
+      total -= num * Math.pow(radix, -(index + 1))
+    }
+  }
+
+  return isPositive ? total : -total
+}
+
+export function numberFillRange(min: number, max: number, n: number): number {
+  return numberMin(numberMax(min, n), max)
+}
+
+export function number10ToN(radix: number, num: number) {
+  if (!isNumber(num)) throw new TypeError()
+  if (!num || !radix || radix === 10) return num
+  if (radix < 2 || radix > 36) { throw new Error() }
+
+  const getLetter = (num: number) => num >= 10 ? String.fromCharCode('a'.charCodeAt(0) + num - 10) : `${num}`
+  const isPositive = num > 0
+  num = Math.abs(num)
+  let integer = Math.floor(num)
+  let decimal = ((d) => {
+    return isNaN(d) ? 0 : d/ Math.pow(10, numberIntegerLength(d))
+  })(Number((num + '').split('.')[1]))
+  
+  
+  let str = ''
+  
+  // 整数
+  while (integer >= radix) {
+    const yu = integer % radix
+    str = `${getLetter(yu)}${str}`
+    integer = Math.floor(integer / radix)
+  }
+
+  str = `${getLetter(integer)}${str}`
+
+  if (decimal) {
+    // 小数
+    str += '.'
+    const len = `${decimal}`.length
+    for (let i = 0; i < len; i++) {
+      const num = Math.floor(radix * decimal)
+      str = `${str}${getLetter(num)}`
+      decimal = radix * decimal - num
+    }
+
+    str = str.replace(/0+$/, '')
+  }
+
+  
+
+  return isPositive ? str : `-${str}`
+}
+
+export function numberPercentToFloat(nStr: string): number {
+  const v = nStr === '' 
+    ? 1
+    : nStr.endsWith('%')
+      ? parseFloat(nStr.slice(0, -1)) / 100
+      : parseFloat( nStr.startsWith('.') ? '0' + nStr : nStr)
+
+  return v 
+   
 }

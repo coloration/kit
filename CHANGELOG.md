@@ -1,5 +1,42 @@
 # Change Log
 
+## 1.8.0
+
+### Feature
+
+- encode/base
+  - `n10ToN(2, 3)` => '11'
+  - `nToN10(16, 'ff')` => 255
+
+- encode/color
+  - `ColorType[Rgb,HSL,HEX]`
+  - `interface Color`
+  - `colorIsHex/colorIsRgb/colorIsHsl(str)` => Color
+  - `colorAnyToRgbWithDom(str)` => rgba(foo, bar, baz)
+  - `colorHexToRgba/colorRgbaToHex`
+  - `colorShortHexRegExp/colorHexRegExp/colorRgbaRegExp/colorHslaRegExp`
+
+- number
+  - `numberNTo10(16, 'ff')` => 255
+  - `number10ToN(2, 3)` => '11'
+  - `numberToDouble(9)` => '09'; ~('a') => '0a'
+  - `numberIntegerLength(1000.0)` => 3
+  - `numberDecimalLength(1000.0)` => 1
+  - `numberFillRange(0, 1, 25)` => 1, `~(0, 255, -1)` => 0
+  - `numberPercentToFloat('5%')` => 0.05
+
+### Fix
+
+- dom/download
+  - `downloadWithDataurl` response error
+
+### Perf
+
+- object
+  - add generic for `queryToObject<T = PlainObject>`
+- add color/number tests
+- replace rollup with vite
+
 ## 1.7.0
 
 ### Feature
