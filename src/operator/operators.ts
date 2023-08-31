@@ -3,8 +3,8 @@ import { isObject } from './type'
 import { curry } from './curry'
 
 export const is: <T = any>(a: T, b: T) => boolean = curry(equal, Object.is)
-export const not: <T = any>(a: T, b: T) => boolean = curry(equal, function () {
-  return !Object.is.apply(null, arguments)
+export const not: <T = any>(a: T, b: T) => boolean = curry(equal, function (...args: any[]) {
+  return !Object.is.apply(null, args as any)
 })
 
 export function deepEqual (a: any, b: any): boolean {

@@ -3,7 +3,7 @@ import { isFunction } from "../operator"
 export function microDelay(fn: (...args: any[]) => any) {
   let microtaskStarted = false
   const resolvePromise = Promise.resolve()
-  let cache = []
+  let cache: any[] = []
 
   return function (...args: any[]) {
     if (!microtaskStarted) microtaskStarted = true
@@ -22,7 +22,7 @@ export function microDelay(fn: (...args: any[]) => any) {
 export function macroDelay (fn: (...args: any[]) => any) {
 
   let count = 0
-  let cache = []
+  let cache: any[] = []
 
   return function (...args: any[]) {
     cache[0] = args

@@ -16,16 +16,18 @@ export function isPlainObject (o: any): boolean {
   return isDefind(o) && !isPrimitive(o)
 }
 
-export const isString = (o: any) => typeof o === 'string'
+export const isString = (o: any): o is string => typeof o === 'string'
+
 // NaN
-export const isNumber = (o: any) => toRawType(o) === 'Number'
-export const isSymbol = (o: any) => typeof o === 'symbol'
-export const isBoolean = (o: any) => typeof o === 'boolean'
-export const isFunction = (o: any) => typeof o === 'function'
+export const isNumber = (o: any): o is number => toRawType(o) === 'Number'
+
+export const isSymbol = (o: any): o is symbol => typeof o === 'symbol'
+export const isBoolean = (o: any): o is boolean => typeof o === 'boolean'
+export const isFunction = (o: any): o is Function => typeof o === 'function'
 
 export const isArrayBuffer = (o: any) => toRawType(o) === 'ArrayBuffer'
 
-export const isRegExp = (o: any) => toRawType(o) === 'RegExp'
+export const isRegExp = (o: any): o is RegExp => toRawType(o) === 'RegExp'
 
 export const isNumberLike = (o: any) => isNumber(Number(o))
 
@@ -39,7 +41,7 @@ export function isPromise (o: any): boolean {
 }
 
 export function isIE (): boolean {
-  return !!(window as any).ActiveXObject || "ActiveXObject" in window
+  return !!('ActiveXObject' in globalThis)
 }
 
 export function isFalsy (o: any) : boolean {
@@ -55,7 +57,7 @@ export function isNodeEnv (): boolean {
 }
 
 export function isWebEnv (): boolean {
-  return !!globalThis.document
+  return !!('document' in globalThis)
 }
 
 export function isEmptyArray (o: any): boolean {

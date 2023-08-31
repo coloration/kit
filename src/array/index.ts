@@ -91,7 +91,7 @@ export function arraySlice<T = any> (array: T[], start: number, end?: number) : 
     end -= leng
   }
 
-  let result = []
+  let result: T[] = []
   
   do {
     result = result.concat(array.slice(start, end <= leng ? end : leng))

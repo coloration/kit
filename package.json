@@ -1,41 +1,77 @@
 {
   "name": "@coloration/kit",
-  "version": "1.7.0",
-  "main": "lib/index.js",
-  "module": "esm/index.js",
-  "typings": "types/index.d.ts",
-  "files": ["lib", "esm", "types", "dist"],
-  "scripts": {
-    "test": "jest --coverage",
-    "build": "rm -rf types & tsc & rollup -c"
-  },
+  "type": "module",
+  "version": "1.8.0",
+  "packageManager": "pnpm@8.7.0",
+  "description": "JavaScript utils function",
+  "author": "Binyu Wang<406279919@qq.com>",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/binyu1231",
+  "homepage": "https://github.com/coloration/kit#readme",
   "repository": {
     "type": "git",
-    "url": "git@github.com:coloration/kit.git"
+    "url": "git+https://github.com/coloration/kit.git"
   },
-  "author": "WangBinyu <406279919@qq.com>",
-  "license": "MIT",
-  "description": "",
-  "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
-    "@types/d3-format": "^1.3.1",
-    "@types/jest": "^25.2.3",
-    "babel-jest": "^24.8.0",
-    "babel-loader": "^8.0.6",
-    "jest": "^26.0.1",
-    "rollup": "^2.16.0",
-    "rollup-jest": "^0.0.2",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-uglify": "^6.0.4",
-    "terser-webpack-plugin": "^2.3.5",
-    "ts-jest": "^26.0.0",
-    "ts-loader": "^5.3.3",
-    "typescript": "^3.3.4000"
+  "bugs": "https://github.com/coloration/kit/issues",
+  "keywords": ["JavaScript Utils"],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "lint": "eslint .",
+    "prepublishOnly": "nr build",
+    "release": "bumpp && npm publish",
+    "start": "esno src/index.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepare": "simple-git-hooks"
   },
   "dependencies": {
-    "d3-format": "^1.4.3",
-    "html2canvas": "^1.0.0-rc.5"
+    "d3-format": "^3.1.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.41.0",
+    "@antfu/ni": "^0.21.6",
+    "@antfu/utils": "^0.7.6",
+    "@types/d3-format": "^3.0.1",
+    "@types/node": "^20.5.7",
+    "bumpp": "^9.2.0",
+    "eslint": "^8.48.0",
+    "esno": "^0.17.0",
+    "lint-staged": "^14.0.1",
+    "pnpm": "^8.7.0",
+    "rimraf": "^5.0.1",
+    "simple-git-hooks": "^2.9.0",
+    "typescript": "^5.2.2",
+    "unbuild": "^2.0.0",
+    "vite": "^4.4.9",
+    "vitest": "^0.34.3"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }
